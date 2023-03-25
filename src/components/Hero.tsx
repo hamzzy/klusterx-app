@@ -13,9 +13,7 @@ import {
   import { FunctionComponent, useContext, useEffect, useState } from "react";
   interface HeroSectionProps {}
   
-  export const HeroSection: FunctionComponent<HeroSectionProps> = () => {
-    const [getdata, setData] = useState<any>([]);
-  
+  export const HeroSection: FunctionComponent<HeroSectionProps> = () => {  
         
   
     return (

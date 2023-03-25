@@ -1,6 +1,7 @@
 import { data } from '@/data';
 import {getLeagueTableStats} from "@/utils";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, HStack, Heading, VStack } from '@chakra-ui/react';
+import FixtureList from './Fixture';
 import { LeagueTable} from './LeagueTable';
 
 export default function TableTab() {
@@ -16,7 +17,7 @@ export default function TableTab() {
         <LeagueTable data={getLeagueTableStats(data)}/>
     </TabPanel>
     <TabPanel>
-        
+        <FixtureList/>
     </TabPanel>
   </TabPanels>
 </Tabs>

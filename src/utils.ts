@@ -5,8 +5,9 @@ import {logo} from "./data";
 
 
 export const getClubLogo = (name) => {
-    const club_logo=logo.filter((data)=>{ return data.name === name})[0].url
-    return club_logo;
+    const club_logo=logo.find((item) => item.name === name);
+    
+    return club_logo.url;
 
 }
 

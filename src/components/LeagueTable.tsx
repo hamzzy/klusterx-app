@@ -63,7 +63,8 @@ interface TeamData {
         </Thead>
         <Tbody>
           {data.map((item, index) => (
-            <Tr key={index}>
+            <Tr key={index}   _hover={{ backgroundColor: "gray.100", cursor: "pointer" }}
+            >
               <Td>{item.position}</Td>
               <Td>
               <HStack spacing='5px' align="center">                

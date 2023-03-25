@@ -75,10 +75,13 @@ export default function Header() {
               fontFamily="monospace"
               fontWeight="bold"
             >
-                    <Image src='logo.svg' alt='Logo'  height="50px"/>
+                            <HStack spacing='5px' align="center">                
+
+                    <Image src='../logo.svg' alt='Logo'  height="50px"/>
                     <span>
  Leauge
                     </span>
+                    </HStack>
             </Link>
           </Box>
 
