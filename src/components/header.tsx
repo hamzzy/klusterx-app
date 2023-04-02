@@ -23,7 +23,6 @@ import { Image } from '@chakra-ui/react'
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-const Links = ["dashboard", "Projects", "Team"];
 
 const NavLink = ({ children }: { children: ReactNode }) => (
   <Link

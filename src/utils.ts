@@ -1,5 +1,6 @@
 import {logo} from "./data";
 
+import { format } from "date-fns";
 
 
 
@@ -97,3 +98,40 @@ export const getLeagueTableStats=(data:any) =>{
     return table
   }
 
+
+
+
+  interface Fixture {
+    homeTeam: string;
+    awayTeam: string;
+    date: Date;
+  }
+  
+  const currentDateTime = new Date("2021-05-05T14:00:00");
+  
+  export const getFormattedDate = (date: Date) => {
+    return format(date, "dd/MM, HH:mm");
+  };
+  
+  export const createFixtures = (data: any): Fixture[] => {
+    const pastFixtures: Fixture[] = [];
+    const futureFixtures: Fixture[] = [];
+  
+    data.forEach((item: any) => {
+      const score = item.score;
+      const date = new Date(item.date);
+  
+      const homeTeam = Object.keys(score).find((key) => score[key] !== null);
+      const awayTeam = Object.keys(score).find((key) => key !== homeTeam);
+  
+      const fixture: Fixture = { homeTeam: homeTeam ?? "", awayTeam: awayTeam ?? "", date };
+  
+      if (date < currentDateTime) {
+        pastFixtures.push(fixture);
+      } else {
+        futureFixtures.push(fixture);
+      }
+    });
+  
+    return [...pastFixtures.reverse(), ...futureFixtures];
+  };
