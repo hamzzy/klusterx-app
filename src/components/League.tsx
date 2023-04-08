@@ -13,15 +13,9 @@ import {
   Image,
   HStack,
 } from "@chakra-ui/react";
-import {
-  createFixtures,
-  getClubLogo,
-  getLeagueTableStats,
-} from "@/utils";
-import {LeagueFixture} from "./LeagueFixture";
+import { createFixtures, getClubLogo, getLeagueTableStats } from "@/utils";
+import { LeagueFixture } from "./LeagueFixture";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-
-
 
 export const League = ({ data }) => {
   const [fixtures] = useState(() => createFixtures(data));
@@ -62,7 +56,11 @@ export const League = ({ data }) => {
           </Box>
           <Box>
             <HStack spacing="5px" align="center">
-              <Image src={getClubLogo(selectedTeam)} height="100" />
+              <Image
+                src={getClubLogo(selectedTeam)}
+                alt="team logo"
+                height="100"
+              />
 
               <Heading as="h2" size="lg">
                 {selectedTeam} fixtures
@@ -96,7 +94,11 @@ export const League = ({ data }) => {
                 <Td>{item.position}</Td>
                 <Td>
                   <HStack spacing="5px" align="center">
-                    <Image src={getClubLogo(item.name)} height="7" />
+                    <Image
+                      src={getClubLogo(item.name)}
+                      height="7"
+                      alt="team logo"
+                    />
                     <Text
                       onClick={() => handleTeamClick(item.name)}
                       fontWeight="bold"

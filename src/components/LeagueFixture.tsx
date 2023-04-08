@@ -48,6 +48,7 @@ export const LeagueFixture = ({ fixtures, selectedTeam }) => {
                           <Image
                             src={getClubLogo(fixture.homeTeam)}
                             height="70"
+                            alt="home team logo"
                           />
                         </Box>
                         <Box>
@@ -60,7 +61,6 @@ export const LeagueFixture = ({ fixtures, selectedTeam }) => {
                               size="sm"
                               variant="solid"
                               fontSize="30px"
-                              variant="solid"
                               mr="2"
                             >
                               {fixture.homeScore}
@@ -80,6 +80,7 @@ export const LeagueFixture = ({ fixtures, selectedTeam }) => {
                           <Image
                             src={getClubLogo(fixture.awayTeam)}
                             height="70"
+                            alt="away team logo"
                           />
                         </Box>
                         {/* <Box>
