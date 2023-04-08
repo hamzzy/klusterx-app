@@ -3,15 +3,9 @@ import { Box, Flex } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/Hero";
-import { useEffect, useState } from "react";
-import bgimage from "../../public/banner.png";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-import TableTab from '../components/TableTab';
+import { League } from "@/components/League";
+import { data } from "@/data";
 const Home: NextPage = () => {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-      setMounted(true)
-  }, [])
   return (
     <Layout>
       <Flex
@@ -25,12 +19,11 @@ const Home: NextPage = () => {
         position="relative"
       >
         <HeroSection />
-
       </Flex>
 
-
-      <TableTab/>
-
+      <Flex mt="15">
+        <League data={data} />
+      </Flex>
     </Layout>
   );
 };

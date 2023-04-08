@@ -2,26 +2,14 @@ import { ReactNode } from "react";
 import {
   Box,
   Flex,
-  Avatar,
   HStack,
   Link,
   IconButton,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useDisclosure,
   useColorModeValue,
   Stack,
-  Text,
-  VStack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { Image } from '@chakra-ui/react'
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 
 
 const NavLink = ({ children }: { children: ReactNode }) => (
@@ -41,8 +29,7 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 
 export default function Header() {
  
-  const router = useRouter()
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  
 
 
   return (
@@ -59,13 +46,7 @@ export default function Header() {
         borderColor={useColorModeValue("gray.200", "gray.900")}
       >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <IconButton
-            size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={"Open Menu"}
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-          />
+
           <Box>
             <Link
               href="/"
@@ -76,7 +57,7 @@ export default function Header() {
             >
                             <HStack spacing='5px' align="center">                
 
-                    <Image src='../logo.svg' alt='Logo'  height="50px"/>
+                    <Image src='../logo.svg' alt='Logo' id ='header-logo'  height="50px"/>
                     <span>
  Leauge
                     </span>
@@ -84,34 +65,9 @@ export default function Header() {
             </Link>
           </Box>
 
-          <Flex alignItems={"center"}>
-              <>
-                <Menu>
-                  <MenuList>
-                    <MenuItem>
-                      <Link href="/dashboard" textDecoration="none">
-                        Dashboard
-                      </Link>
-                    </MenuItem>
-                    <MenuDivider />
-                    <MenuItem>
-                      <Text>Logout</Text>
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
-              </>
-          </Flex>
         </Flex>
 
-        {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
-            </Stack>
-          </Box>
-        ) : null}
+      
       </Box>
     </>
   );

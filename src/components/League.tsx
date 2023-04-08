@@ -11,69 +11,22 @@ import {
   Tr,
   Text,
   Image,
-  SimpleGrid,
   HStack,
-  Flex,
-  ListItem,
-  List,
-  VStack,
-  TagLabel,
-  Tag,
-  Container,
-  Divider,
-  TagLeftIcon,
-  Grid,
-  GridItem,
-  StackDivider,
-  Code,
 } from "@chakra-ui/react";
-import { getClubLogo, getFormattedDate } from "@/utils";
-import { AddIcon, ArrowBackIcon } from "@chakra-ui/icons";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
-import { data as dd } from "../data";
+import {
+  createFixtures,
+  getClubLogo,
+  getLeagueTableStats,
+} from "@/utils";
+import {LeagueFixture} from "./LeagueFixture";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 
-interface LeagueTableProps {
-  data: TeamData[];
-}
 
-interface Fixture {
-  homeTeam?: string;
-  awayTeam?: string;
-  homeScore?: number;
-  awayScore?: number;
-  fix_date: Date;
-}
 
-const createFixtures = () => {
-  const pastFixtures: Fixture[] = [];
-  const futureFixtures: Fixture[] = [];
-  const currentDateTime = new Date("2021-05-05T14:00:00");
-
-  for (const { score, date } of dd) {
-    const entries: any = Object.entries(score);
-    const fix_date = new Date(date);
-
-    const [homeTeam, homeScore]: any = entries.find(
-      ([key, value]) => value !== ""
-    );
-    const [awayTeam, awayScore]: any = entries.find(
-      ([key, value]) => key !== homeTeam
-    );
-    const fixture: any = { homeTeam, awayTeam, homeScore, awayScore, fix_date };
-    console.log(fixture);
-
-    if (fix_date < currentDateTime) {
-      pastFixtures.push(fixture);
-    } else {
-      futureFixtures.push(fixture);
-    }
-  }
-  return [...pastFixtures.reverse(), ...futureFixtures];
-};
-
-export const LeagueTable = ({ data }) => {
-  const [fixtures] = useState(() => createFixtures());
+export const League = ({ data }) => {
+  const [fixtures] = useState(() => createFixtures(data));
   const [selectedTeam, setSelectedTeam] = useState("");
+  const LeagueTableStat = getLeagueTableStats(data);
 
   const handleBackClick = () => {
     setSelectedTeam("");
@@ -116,81 +69,12 @@ export const LeagueTable = ({ data }) => {
               </Heading>
             </HStack>
           </Box>
-
-          <VStack align="stretch">
-            <Box>
-              {fixtures
-                .filter(
-                  (fixture) =>
-                    fixture.homeTeam === selectedTeam ||
-                    fixture.awayTeam === selectedTeam
-                )
-                .map((fixture, index) => (
-                  <>
-                    <Container>
-                      <Card
-                        mt="10"
-                        variant="elevated"
-                        _hover={{ backgroundColor: "", cursor: "pointer" }}
-                        borderBottom-color="rgb(239, 239, 239)"
-                        alignContent="center"
-                        width="700px"
-                        height="120px"
-                      >
-                        <CardBody>
-                          <Center>
-                            <HStack spacing={2}>
-                              <Text size-="10" color="teal">
-                                {fixture.homeTeam}
-                              </Text>
-                              <Box>
-                                <Image
-                                  src={getClubLogo(fixture.homeTeam)}
-                                  height="70"
-                                />
-                              </Box>
-                              <Box>
-                                  <Text size-="10">
-                                    {getFormattedDate(fixture.fix_date)}
-                                  </Text>
-
-                                  <Center>
-                                <Text size="sm" variant='solid' fontSize="38px" variant='solid' mr="2">
-                                  {fixture.homeScore}
-                                     </Text>
-                                     {" "}
-                                     -
-                                     
-                                     <Text size="sm" variant='solid' fontSize="38px" ml="2">
-                                  {fixture.awayScore}
-                                     </Text>
-                                     </Center>
-                                     
-                                  
-                              </Box>
-                              <Box>
-                                <Image
-                                  src={getClubLogo(fixture.awayTeam)}
-                                  height="70"
-                                />
-                              </Box>
-                              <Text size-="10" color="teal">
-                                {fixture.awayTeam}
-                              </Text>
-                            </HStack>
-                          </Center>
-                        </CardBody>
-                      </Card>
-                    </Container>
-                  </>
-                ))}
-            </Box>
-          </VStack>
+          <LeagueFixture fixtures={fixtures} selectedTeam={selectedTeam} />
         </>
       ) : (
         <Table variant="simple" size="md" boxShadow="xl" borderRadius="20px">
           <Thead>
-            <Tr height="100px" backgroundColor="rgb(255, 0, 128)">
+            <Tr height="100px">
               <Th>Position</Th>
               <Th>Team </Th>
               <Th isNumeric>P</Th>
@@ -203,8 +87,8 @@ export const LeagueTable = ({ data }) => {
               <Th isNumeric>Pts</Th>
             </Tr>
           </Thead>
-          <Tbody>
-            {data.map((item, index) => (
+          <Tbody height="100px">
+            {LeagueTableStat.map((item, index) => (
               <Tr
                 key={index}
                 _hover={{ backgroundColor: "gray.100", cursor: "pointer" }}
