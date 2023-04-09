@@ -14,10 +14,15 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { createFixtures, getClubLogo, getLeagueTableStats } from "@/utils";
-import { LeagueFixture } from "./LeagueFixture";
+import { LeagueFixture } from './LeagueFixture';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 
-export const League = ({ data }) => {
+// type TeamProps = {
+//   score: any ;
+//   date: string;
+// };
+
+export const League = (data: any)  => {
   const [fixtures] = useState(() => createFixtures(data));
   const [selectedTeam, setSelectedTeam] = useState("");
   const LeagueTableStat = getLeagueTableStats(data);
@@ -91,7 +96,7 @@ export const League = ({ data }) => {
                 key={index}
                 _hover={{ backgroundColor: "gray.100", cursor: "pointer" }}
               >
-                <Td>{item.position}</Td>
+                <Td>{index + 1}</Td>
                 <Td>
                   <HStack spacing="5px" align="center">
                     <Image

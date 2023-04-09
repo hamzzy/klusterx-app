@@ -1,23 +1,18 @@
 import {
-    Button,
     Center,
     Container,
     Heading,
-    Text,
     VStack,
     Box,
-    Input,
   } from "@chakra-ui/react";
  
   
-  import { FunctionComponent, useContext, useEffect, useState } from "react";
-  interface HeroSectionProps {}
   
-  export const HeroSection: FunctionComponent<HeroSectionProps> = () => {  
+  export const HeroSection = () => {  
         
   
     return (
-      <Container maxW="container.lg">
+      <>
         <Center p={4} minHeight="30vh">
           <VStack>
             <Container maxW="container.md" textAlign="left">
@@ -32,6 +27,6 @@ import {
 
           </VStack>
         </Center>
-      </Container>
+      </>
     );
   };

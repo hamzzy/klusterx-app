@@ -6,9 +6,7 @@ export const getClubLogo = (name: string) => {
 
   return club_logo.url;
 };
-
-interface Teamdata {
-  position: ReactNode;
+interface TeamData {
   name: string;
   gamesPlayed: number;
   wins: number;
@@ -20,13 +18,14 @@ interface Teamdata {
   points: number;
 }
 
-export const getLeagueTableStats = (data: any): Teamdata[] => {
-  const teams = {};
+export const getLeagueTableStats = (leagueData: { data: { score: Record<string, number | null>; date: string }[] }): TeamData[] => {
+  const teams: Record<string, TeamData> = {};
+  const data = leagueData.data;
+  const currentDate = new Date("2021-05-05T14:00:00");
 
   // Loop through data and calculate stats for each team
   for (let i = 0; i < data.length; i++) {
     const { score, date } = data[i];
-    const currentDate = new Date("2021-05-05T14:00:00");
     const gameDate = new Date(date);
 
     // Skip games in the future
@@ -35,7 +34,7 @@ export const getLeagueTableStats = (data: any): Teamdata[] => {
     }
 
     // Calculate stats for each team
-    for (let [team, goals] of Object.entries(score)) {
+    for (const [team, goals] of Object.entries(score)) {
       if (!teams[team]) {
         teams[team] = {
           name: team,
@@ -97,7 +96,6 @@ export const getLeagueTableStats = (data: any): Teamdata[] => {
 
   // Format and return league table statistics
   const table = sortedTeams.map((team, index) => ({
-    position: index + 1,
     name: team.name,
     gamesPlayed: team.gamesPlayed,
     wins: team.wins,
@@ -112,7 +110,7 @@ export const getLeagueTableStats = (data: any): Teamdata[] => {
   return table;
 };
 
-interface Fixture {
+export interface Fixture {
   homeTeam?: string;
   awayTeam?: string;
   homeScore?: number;
@@ -128,8 +126,7 @@ export const createFixtures = (data: any): Fixture[] => {
   const pastFixtures: Fixture[] = [];
   const futureFixtures: Fixture[] = [];
   const currentDateTime = new Date("2021-05-05T14:00:00");
-
-  for (const { score, date } of data) {
+  for (const { score, date } of data.data) {
     const entries: any = Object.entries(score);
     const fix_date = new Date(date);
 
@@ -140,7 +137,6 @@ export const createFixtures = (data: any): Fixture[] => {
       ([key, value]) => key !== homeTeam
     );
     const fixture: any = { homeTeam, awayTeam, homeScore, awayScore, fix_date };
-    console.log(fixture);
 
     if (fix_date < currentDateTime) {
       pastFixtures.push(fixture);
