@@ -17,10 +17,7 @@ import { createFixtures, getClubLogo, getLeagueTableStats } from "@/utils";
 import { LeagueFixture } from './LeagueFixture';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 
-// type TeamProps = {
-//   score: any ;
-//   date: string;
-// };
+
 
 export const League = (data: any)  => {
   const [fixtures] = useState(() => createFixtures(data));

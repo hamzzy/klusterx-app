@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import { Box, Flex } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/Hero";
 import { League } from "@/components/League";

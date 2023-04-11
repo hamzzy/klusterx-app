@@ -15,7 +15,7 @@ import { Fixture, getClubLogo, getFormattedDate } from "@/utils";
 
 export const LeagueFixture = ({ fixtures , selectedTeam }:{ fixtures: Fixture[], selectedTeam : string}) => (
   <VStack align="stretch">
-    <Box>
+    <Box >
       {fixtures
         .filter(
           (fixture: any) =>
@@ -24,25 +24,26 @@ export const LeagueFixture = ({ fixtures , selectedTeam }:{ fixtures: Fixture[],
         )
         .map((fixture, index) => (
           <>
-            <Container>
+            <Container key={index}>
               <Card
                 mt="10"
                 variant="elevated"
                 _hover={{ backgroundColor: "", cursor: "pointer" }}
-                borderBottom-color="rgb(239, 239, 239)"
+                borderBottomColor="rgb(239, 239, 239)"
                 alignContent="center"
                 width="700px"
                 height="120px"
+                key={index}
               >
                 <CardBody>
                   <Center>
                     <HStack spacing={2}>
-                      {/* <Box>
+                      <Box>
 
               <Text size-="10" color="teal">
                 {fixture.homeTeam}
               </Text>
-              </Box> */}
+              </Box>
 
                       <Box>
                         <Image
@@ -83,12 +84,12 @@ export const LeagueFixture = ({ fixtures , selectedTeam }:{ fixtures: Fixture[],
                           alt="away team logo"
                         />
                       </Box>
-                      {/* <Box>
+                      <Box>
 
               <Text size-="10" color="teal">
                 {fixture.awayTeam}
               </Text>
-              </Box> */}
+              </Box>
                     </HStack>
                   </Center>
                 </CardBody>
